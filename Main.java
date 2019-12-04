@@ -192,9 +192,13 @@ public class Main
     {
         Professor P = new Professor();
         Scanner cn = new Scanner(System.in);
+	System.out.printf("informe o nome ");
         P.setNome(cn.nextLine());
+	System.out.printf("informe a matricula ");
         P.setMatricula(cn.nextLong());
+	System.out.printf("informe a especialização ");
         P.setEspecializacao(cn.nextLine());
+	System.out.printf("informe o salário ");
         P.setSalario(cn.nextFloat());
         ProfLista.add(P);
     }
@@ -273,7 +277,7 @@ public class Main
                 break;
             }
         }
-        System.out.printf("informe o numer de aulos");
+        System.out.printf("informe o numero de alunos");
         T.setNumAlunos(cn.nextInt());
         System.out.printf("informe o numero de dias na semana");
         n = cn.nextInt();
