@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import entities.Predio;
 
 public class Sala 
 {
+	private int taxaocupa;// horarios de aula ocupados dividido por horarios de aula desocupados
     private int idSala;// numero da sala
     private int capacidade;
     private boolean ar;
@@ -19,6 +21,26 @@ public class Sala
     private Predio predio;
     private ArrayList <Ocupa> ocupacoes = new ArrayList<Ocupa>();
     private ArrayList <Turma> turmas = new ArrayList<Turma>();
+    
+    public int calcularOcupacao() {
+    	int hrocupados, hrtotais, hrlivres ;
+    	hrocupados = this.ocupacoes.size();
+    	hrtotais = this.getPredio().getQuantaula() * 5 ; 
+    	hrlivres = hrtotais- hrocupados;
+    	taxaocupa = hrocupados/hrlivres;
+    	return taxaocupa;
+    	
+    	
+    }
+    public int getTaxaocupa() 
+    {
+        return taxaocupa;
+    }
+
+    public void setTaxaocupa(int taxaocupa) 
+    {
+        this.taxaocupa = taxaocupa;
+    }
     
     public Predio getPredio() 
     {
@@ -141,6 +163,7 @@ public class Sala
             pw.println(this.ar);
             pw.println(this.projetor);
             pw.println(this.tv);
+            pw.println(this.taxaocupa);
             pw.flush();
             pw.close();
             fw.close();
@@ -167,11 +190,12 @@ public class Sala
         System.out.printf("informe se tem projetor (true/false)");
         this.setProjetor(cn.nextBoolean());
         System.out.printf("informe se tem TV (true/false)");
+        this.setTaxaocupa(this.calcularOcupacao());
         this.setTv(cn.nextBoolean());
         this.criaDiretSala();
         this.Salvar();
         this.salvarLis();
-        
+        cn.close();
         return this;
     }
 }
