@@ -1,5 +1,7 @@
-package entities;
+package Entities;
 
+import Entities.Sala;
+import Entities.Turma;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -122,7 +124,6 @@ public class Ocupa
         {
             Logger.getLogger(Sala.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return "Lista salva";
     }
     
@@ -143,7 +144,6 @@ public class Ocupa
         {
             Logger.getLogger(Turma.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return "Lista salva";
     }*/  
     
