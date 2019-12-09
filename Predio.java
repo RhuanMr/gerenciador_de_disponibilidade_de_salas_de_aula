@@ -8,10 +8,12 @@
 	import java.util.Scanner;
 	import java.util.logging.Level;
 	import java.util.logging.Logger;
+	
 
 	public class Predio 
 	{
 		private int horarioabr;
+		private int taxaocuppred;
 		private int horariofech;
 		private int horarioaula[];
 		private int quantaula;
@@ -46,6 +48,29 @@
 	    hf.close();
 	    ha.close();
 	    }
+	    
+	    
+	    public int calculaOcuppred() {
+	    	/*numero de períodos de aula ocupados nas salas pelo
+	    	  numero de periodos de aula em que as salas estiveram vazias*/
+	    	
+	    	int hrocupadosala = 0;
+	    	int hrtotalsala, hrlivresala, i ;
+	    	hrtotalsala = quantaula * 5 * qtd_salas;
+	    	for (i=0; i < qtd_salas; i ++) {
+	    		hrocupadosala =	hrocupadosala + getSala().get(i).getOcupa().size();
+	    		}
+	    	
+	    	hrlivresala = hrtotalsala - hrocupadosala;
+	    	taxaocuppred = hrocupadosala/hrlivresala;
+	    	
+	    	
+	    	
+	    	return taxaocuppred;
+	    		
+	    	}
+	    
+	    
 	    public int getQuantaula() 
 	    {
 	        return quantaula;
@@ -156,6 +181,7 @@
 	            pw.println(this.horarioabr);
 	            pw.println(this.horariofech);
 	            pw.println(this.quantaula);
+	            pw.println(this.taxaocuppred);
 	            pw.flush();
 	            pw.close();
 	            fw.close();
@@ -180,6 +206,7 @@
 	        n = cn.nextInt();
 	        this.setQtd_salas(n);
 	        this.definirHorariofunc();
+	        this.calculaOcuppred();
 	        this.criaDiretPredio();
 	        this.Salvar();
 	        this.salvarLis();
@@ -206,7 +233,8 @@
 	            i++;
 	        }while(i<n);
 	        this.setSala(SalaPred);
-	        
+	        cn.close();
+	        cn2.close();
 	        return this;
 	    }
 	            
