@@ -1,4 +1,4 @@
-	package entities;
+		package entities;
 
 	import java.io.File;
 	import java.io.FileWriter;
@@ -11,14 +11,16 @@
 
 	public class Predio 
 	{
-		private int horariofunc[];
+		private int horarioabr;
+		private int horariofech;
+		private int horarioaula[];
 	    private int qtd_salas;
 	    private String nome;
 	    private Instituicao instituicao;//faz a associação com instituições
 	    private ArrayList <Sala> salas = new ArrayList<Sala>();
 	
 	    
-	    public void definirHorariofunc() {
+	    public void definirhorariofunc() {
 	    	
 	    	 String a, b ;
 	    	 int i,p,w;
@@ -26,15 +28,17 @@
 	    	System.out.println("Defina a quantidade de aulas/dia no prédio.");
 	    	a = hf.nextLine();
 	    	p= Integer.parseInt(a);
-	    	horariofunc = new int [p];
-	    	System.out.println("Defina o horario de abertura do predio.");
+	    	horarioaula = new int [p];
+	    	System.out.println("Defina o horario de abertura do predio (hhmm).");
 	    	Scanner ha = new Scanner(System.in);
 	    	b = ha.nextLine();
 	    	w = Integer.parseInt(b);
-	    	horariofunc[0]= w;
+	    	horarioaula[0]= w;
+	    	horarioabr =  horarioaula[0];
 	    	for (i = 1 ;i < p; i ++) {
-	    		horariofunc[i] = horariofunc[0]+200;// os horrios sairiam em 0800,1000,1200
-	    		System.out.println("o horario de funcionamento do prédio e de"+ horariofunc[0] + "-" + horariofunc[i]);
+	    		horarioaula[i] = horarioaula[0]+200;// os horrios sairiam em 0800,1000,1200
+	    		horariofech =  horarioaula[p-1] + 200 ;
+	    		System.out.println("o horario de funcionamento do prédio e de"+ horarioabr + "-" + horariofech);
 	    	}
 	    	
 	    }
@@ -118,6 +122,8 @@
 	            pw.println(this.instituicao.getNome());
 	            pw.println(this.nome);
 	            pw.println(this.qtd_salas);
+	            pw.println(this.horarioabr);
+	            pw.println(this.horariofech);
 	            pw.flush();
 	            pw.close();
 	            fw.close();
@@ -141,6 +147,7 @@
 	        System.out.printf("informe o numero de salas ");
 	        n = cn.nextInt();
 	        this.setQtd_salas(n);
+	        this.definirhorariofunc();
 	        this.criaDiretPredio();
 	        this.Salvar();
 	        this.salvarLis();
@@ -172,5 +179,4 @@
 	    }
 	            
 	}
-
 
